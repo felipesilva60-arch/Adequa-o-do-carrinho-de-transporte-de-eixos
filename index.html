@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111827">
+
+  <title>RollMove | Transporte Industrial</title>
+
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <div class="topline"></div>
+
+  <div class="layout">
+    <aside>
+      <div class="brand">
+        <div class="logo">R</div>
+        <div>
+          <strong>RollMove</strong>
+          <small>GESTÃO DE TRANSPORTE INDUSTRIAL</small>
+        </div>
+      </div>
+
+      <div class="navlabel">MENU PRINCIPAL</div>
+
+      <nav class="nav">
+        <button class="active" data-page="dashboard">▦ Painel geral</button>
+        <button data-page="transporte">⇄ Transporte</button>
+        <button data-page="inspecoes">✓ Inspeções</button>
+        <button data-page="ordens">▤ Ordens de serviço</button>
+        <button data-page="sobre">ⓘ Sobre o projeto</button>
+      </nav>
+
+      <div class="side-note">
+        <b>● PROTÓTIPO DEMONSTRATIVO</b>
+        Os registros ficam salvos neste navegador.
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>RollMove / <span id="crumbCurrent">Painel geral</span></div>
+        <div class="profile">
+          <div class="avatar">RM</div>
+          <div>
+            <strong>Equipe RollMove</strong>
+            <small>Grand Prix SENAI</small>
+          </div>
+        </div>
+      </header>
+
+      <!-- PAINEL GERAL -->
+      <section class="page active" id="page-dashboard">
+        <div class="hero">
+          <div class="eyebrow">GRAND PRIX DE INOVAÇÃO SENAI</div>
+          <h1>Mais segurança.<br>Menos esforço.</h1>
+
+          <p>
+            Uma proposta para melhorar o transporte de eixos industriais,
+            preservando a estabilidade, a segurança e a facilidade de manobra.
+          </p>
+
+          <button class="btn" data-go="transporte">
+            Registrar transporte
+          </button>
+
+          <button class="btn secondary" data-go="inspecoes">
+            Fazer inspeção
+          </button>
+        </div>
+
+        <div class="metrics">
+          <div class="metric">
+            <small>Transportes registrados</small>
+            <strong id="metricTrans">0</strong>
+          </div>
+
+          <div class="metric">
+            <small>Inspeções concluídas</small>
+            <strong id="metricIns">0</strong>
+          </div>
+
+          <div class="metric">
+            <small>Ordens abertas</small>
+            <strong id="metricOrd">0</strong>
+          </div>
+
+          <div class="metric">
+            <small>Capacidade exigida</small>
+            <strong>2 eixos</strong>
+          </div>
+        </div>
+
+        <div class="grid2">
+          <div class="card">
+            <h3>Objetivo do projeto</h3>
+            <p>
+              Desenvolver uma proposta de melhoria para o carrinho de
+              transporte de eixos da Mill Roll Rolos Industriais Ltda.
+            </p>
+
+            <ul>
+              <li>Transportar dois eixos simultaneamente.</li>
+              <li>Melhorar a estabilidade da carga.</li>
+              <li>Reduzir o esforço físico dos operadores.</li>
+              <li>Facilitar as manobras no galpão.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Atividade recente</h3>
+
+            <div class="tablewrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Detalhe</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+
+                <tbody id="recentBody">
+                  <tr>
+                    <td colspan="4">Nenhuma atividade registrada.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TRANSPORTE -->
+      <section class="page" id="page-transporte">
+        <div class="section-head">
+          <h2>Registrar transporte</h2>
+          <p>Registre uma movimentação demonstrativa.</p>
+        </div>
+
+        <div class="card">
+          <form id="transportForm">
+            <label for="operator">Operador responsável</label>
+            <input id="operator" required maxlength="60"
+                   placeholder="Nome do operador">
+
+            <label for="axisCount">Quantidade de eixos</label>
+            <select id="axisCount">
+              <option value="2">2 eixos</option>
+              <option value="1">1 eixo</option>
+            </select>
+
+            <label for="route">Trajeto</label>
+            <select id="route">
+              <option>Usinagem → Estoque</option>
+              <option>Estoque → Produção</option>
+              <option>Produção → Expedição</option>
+              <option>Outro trajeto interno</option>
+            </select>
+
+            <label for="loadNote">Observações</label>
+            <textarea id="loadNote" maxlength="300"
+                      placeholder="Observações da movimentação"></textarea>
+
+            <h3>Conferência demonstrativa</h3>
+
+            <label class="checkrow">
+              <input type="checkbox">
+              Trajeto verificado
+            </label>
+
+            <label class="checkrow">
+              <input type="checkbox">
+              Carga devidamente apoiada
+            </label>
+
+            <label class="checkrow">
+              <input type="checkbox">
+              Rodas e estrutura verificadas
+            </label>
+
+            <button class="btn" type="submit">
+              Registrar movimentação
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <!-- INSPEÇÕES -->
+      <section class="page" id="page-inspecoes">
+        <div class="section-head">
+          <h2>Checklist de inspeção</h2>
+          <p>Conferência demonstrativa do carrinho.</p>
+        </div>
+
+        <div class="card">
+          <div id="inspectionChecks">
+            <label class="checkrow">
+              <input type="checkbox">
+              Estrutura sem danos visíveis
+            </label>
+
+            <label class="checkrow">
+              <input type="checkbox">
+              Rodas e movimentação verificadas
+            </label>
+
+            <label class="checkrow">
+              <input type="checkbox">
+              Apoios e contenções conferidos
+            </label>
+
+            <label class="checkrow">
+              <input type="checkbox">
+              Capacidade e carga confirmadas
+            </label>
+
+            <label class="checkrow">
+              <input type="checkbox">
+              Trajeto e área de manobra livres
+            </label>
+          </div>
+
+          <div class="progress">
+            <span id="inspectionProgress"></span>
+          </div>
+
+          <p id="inspectionCount">0 de 5 itens conferidos</p>
+
+          <label for="inspectionNote">Observações</label>
+          <textarea id="inspectionNote"
+                    placeholder="Descreva as observações"></textarea>
+
+          <button class="btn" id="saveInspection" type="button">
+            Salvar inspeção
+          </button>
+
+          <p id="inspectionMessage">
+            Inspeção ainda não concluída.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Histórico de inspeções</h3>
+
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data</th>
+                  <th>Itens</th>
+                  <th>Observações</th>
+                  <th>Resultado</th>
+                </tr>
+              </thead>
+
+              <tbody id="inspectionBody">
+                <tr>
+                  <td colspan="4">Nenhuma inspeção salva.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ORDENS DE SERVIÇO -->
+      <section class="page" id="page-ordens">
+        <div class="section-head">
+          <h2>Ordens de serviço</h2>
+          <p>Registre problemas e acompanhe as atividades.</p>
+        </div>
+
+        <div class="card">
+          <form id="orderForm">
+            <label for="orderTitle">Título da ocorrência</label>
+            <input id="orderTitle" required maxlength="80"
+                   placeholder="Ex.: Verificar roda do carrinho">
+
+            <label for="orderType">Categoria</label>
+            <select id="orderType">
+              <option>Manutenção</option>
+              <option>Segurança</option>
+              <option>Logística</option>
+              <option>Melhoria</option>
+            </select>
+
+            <label for="orderPriority">Prioridade</label>
+            <select id="orderPriority">
+              <option>Normal</option>
+              <option>Alta</option>
+              <option>Urgente</option>
+            </select>
+
+            <label for="orderDesc">Descrição</label>
+            <textarea id="orderDesc" required maxlength="500"
+                      placeholder="Descreva o problema ou melhoria"></textarea>
+
+            <button class="btn" type="submit">
+              Criar ordem de serviço
+            </button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Ordens registradas</h3>
+
+          <div class="tablewrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Número</th>
+                  <th>Ocorrência</th>
+                  <th>Prioridade</th>
+                  <th>Status</th>
+                  <th>Ação</th>
+                </tr>
+              </thead>
+
+              <tbody id="ordersBody">
+                <tr>
+                  <td colspan="5">Nenhuma ordem aberta.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SOBRE -->
+      <section class="page" id="page-sobre">
+        <div class="section-head">
+          <h2>Sobre o projeto</h2>
+          <p>Documentação resumida do protótipo RollMove.</p>
+        </div>
+
+        <div class="card">
+          <h3>Problema que o projeto resolve</h3>
+          <p>
+            O transporte de eixos industriais pode exigir esforço físico
+            e precisa considerar o peso, a estabilidade e as condições
+            do trajeto.
+          </p>
+
+          <h3>Público-alvo</h3>
+          <p>
+            Operadores, equipe de logística, manutenção e gestão industrial.
+          </p>
+
+          <h3>Funcionalidades principais</h3>
+          <ul>
+            <li>Registro de movimentações.</li>
+            <li>Checklist digital de inspeção.</li>
+            <li>Ordens de serviço.</li>
+            <li>Histórico de atividades.</li>
+          </ul>
+
+          <h3>Próximos passos</h3>
+          <p>
+            Medir o carrinho real, avaliar os eixos e o percurso,
+            estudar alternativas, construir um protótipo físico
+            e validar os resultados com segurança.
+          </p>
+
+          <div class="notice">
+            Este site é um protótipo acadêmico. Não substitui
+            dimensionamento mecânico, análise de riscos ou validação técnica.
+          </div>
+
+          <button class="btn secondary" id="exportData">
+            Exportar registros
+          </button>
+
+          <button class="btn danger" id="clearData">
+            Limpar dados locais
+          </button>
+        </div>
+      </section>
+
+      <footer>
+        RollMove © 2026 — Protótipo acadêmico SENAI
+      </footer>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+            </html>

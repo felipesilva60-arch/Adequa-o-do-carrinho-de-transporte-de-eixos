@@ -1,1 +1,0 @@
-# Adequa-o-do-carrinho-de-transporte-de-eixos
